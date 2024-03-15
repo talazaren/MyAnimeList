@@ -1,24 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DBM-ri-3UJ">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Anime List-->
+        <scene sceneID="yJf-8y-DET">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <collectionViewController id="Dg9-yA-OiL" customClass="MainViewController" customModule="MyAnimeList" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Bm9-92-cD6">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="40" minimumInteritemSpacing="20" id="8pz-2n-Pfu">
+                            <size key="itemSize" width="128" height="188"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="30" minY="40" maxX="30" maxY="40"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="customCell" id="Smq-XK-2Pd" customClass="CustomCell" customModule="MyAnimeList" customModuleProvider="target">
+                                <rect key="frame" x="30" y="40" width="127.99999999999997" height="188"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="z6v-97-CpU" customClass="CustomCell" customModule="MyAnimeList" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="188"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jYz-SR-GDj">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emH-dm-KYB">
+                                            <rect key="frame" x="46.666666666666671" y="138" width="34.666666666666671" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TrA-iO-snA">
+                                            <rect key="frame" x="40.666666666666657" y="162" width="47" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="emH-dm-KYB" firstAttribute="centerX" secondItem="z6v-97-CpU" secondAttribute="centerX" id="9WS-fz-J0J"/>
+                                        <constraint firstItem="emH-dm-KYB" firstAttribute="top" secondItem="jYz-SR-GDj" secondAttribute="bottom" constant="10" id="DYU-Jk-u6c"/>
+                                        <constraint firstItem="jYz-SR-GDj" firstAttribute="top" secondItem="z6v-97-CpU" secondAttribute="top" id="PAd-bl-zuM"/>
+                                        <constraint firstItem="jYz-SR-GDj" firstAttribute="leading" secondItem="z6v-97-CpU" secondAttribute="leading" id="T23-nA-ZOd"/>
+                                        <constraint firstItem="TrA-iO-snA" firstAttribute="top" secondItem="emH-dm-KYB" secondAttribute="bottom" constant="3" id="bZm-W1-JfA"/>
+                                        <constraint firstItem="TrA-iO-snA" firstAttribute="centerX" secondItem="z6v-97-CpU" secondAttribute="centerX" id="k3M-5V-bqR"/>
+                                        <constraint firstAttribute="trailing" secondItem="jYz-SR-GDj" secondAttribute="trailing" id="n4T-ld-Jom"/>
+                                        <constraint firstItem="jYz-SR-GDj" firstAttribute="height" secondItem="z6v-97-CpU" secondAttribute="height" multiplier="0.680851" id="wGd-XR-2jS"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="animeGenresLabel" destination="TrA-iO-snA" id="VQS-JN-ac2"/>
+                                    <outlet property="animeImageView" destination="jYz-SR-GDj" id="ken-HR-KV0"/>
+                                    <outlet property="animeTitleLabel" destination="emH-dm-KYB" id="laH-Rm-01h"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Dg9-yA-OiL" id="9Eb-uk-kcs"/>
+                            <outlet property="delegate" destination="Dg9-yA-OiL" id="tWa-pA-oU2"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Anime List" id="hW6-Rz-kot"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1ib-rr-pA6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1690.8396946564885" y="4.9295774647887329"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="W2b-U6-QSQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DBM-ri-3UJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="LFr-0o-lAy">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Dg9-yA-OiL" kind="relationship" relationship="rootViewController" id="0un-i4-G6x"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qx7-I7-rSC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="958" y="5"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
