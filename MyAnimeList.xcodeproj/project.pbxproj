@@ -15,6 +15,7 @@
 		1A3066A12BA4A31700B27EA5 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 1A3066A02BA4A31700B27EA5 /* .gitignore */; };
 		1A3066A32BA4AA8600B27EA5 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3066A22BA4AA8600B27EA5 /* CustomCell.swift */; };
 		1A3066A52BA4AAB300B27EA5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3066A42BA4AAB300B27EA5 /* MainViewController.swift */; };
+		1A3066A72BA4C78600B27EA5 /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3066A62BA4C78600B27EA5 /* Description.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		1A3066A02BA4A31700B27EA5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1A3066A22BA4AA8600B27EA5 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		1A3066A42BA4AAB300B27EA5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		1A3066A62BA4C78600B27EA5 /* Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		1A30669B2BA49F6900B27EA5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1A3066A62BA4C78600B27EA5 /* Description.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			files = (
 				1A3066852BA49EF600B27EA5 /* AppDelegate.swift in Sources */,
 				1A3066A32BA4AA8600B27EA5 /* CustomCell.swift in Sources */,
+				1A3066A72BA4C78600B27EA5 /* Description.swift in Sources */,
 				1A3066872BA49EF600B27EA5 /* SceneDelegate.swift in Sources */,
 				1A3066A52BA4AAB300B27EA5 /* MainViewController.swift in Sources */,
 			);

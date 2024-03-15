@@ -9,9 +9,32 @@ import UIKit
 
 final class MainViewController: UICollectionViewController {
 
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    
+    private let animeAPILink = URL(string: "https://api.jikan.moe/v4/anime")!
+    private var descriptions: AnimeDescription?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        fetchAnimeDescriptions()
+    }
 
+    private func fetchAnimeDescriptions() {
+        URLSession.shared.dataTask(with: animeAPILink) { [unowned self] data, _, error in
+            guard let data else {
+                print(error?.localizedDescription ?? "No error description")
+                return
+            }
+            
+            do {
+                descriptions = try JSONDecoder().decode(AnimeDescription.self, from: data)
+                print(descriptions ?? "No descriptions")
+            } catch {
+                print(error)
+            }
+        }.resume()
     }
 
 
@@ -25,11 +48,11 @@ final class MainViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath)
         guard let cell = cell as? CustomCell else { return UICollectionViewCell() }
                 
-        // Configure the cell
-    
+        
         return cell
     }
-
+    
+    
 
 }
 
