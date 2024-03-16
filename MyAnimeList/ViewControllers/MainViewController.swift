@@ -16,9 +16,13 @@ final class MainViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.dataSource = self
+        
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
+        
         fetchAnimeDescriptions()
+        
     }
 
     private func fetchAnimeDescriptions() {
@@ -30,9 +34,13 @@ final class MainViewController: UICollectionViewController {
             
             do {
                 descriptions = try JSONDecoder().decode(AnimeDescription.self, from: data)
-                print(descriptions ?? "No descriptions")
             } catch {
                 print(error)
+            }
+            
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.collectionView.reloadData()
             }
         }.resume()
     }
@@ -41,13 +49,25 @@ final class MainViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        2
+        return descriptions?.data.count ?? 2
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath)
         guard let cell = cell as? CustomCell else { return UICollectionViewCell() }
-                
+        
+        let titles = descriptions?.data[indexPath.item].titles ?? []
+        var titleLabel = ""
+        
+        titles.forEach { title in
+            if title.type == "Default" {
+                titleLabel = title.title
+            }
+        }
+        cell.animeTitleLabel.text = titleLabel
+        
+        let imageURL = descriptions?.data[indexPath.item].images.jpg.image_url ?? "https://applelives.com/wp-content/uploads/2016/03/iPhone-SE-11.jpeg"
+        cell.animeImageView.image = UIImage(contentsOfFile: imageURL)
         
         return cell
     }
