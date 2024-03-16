@@ -22,7 +22,6 @@ final class MainViewController: UICollectionViewController {
         activityIndicator.hidesWhenStopped = true
         
         fetchAnimeDescriptions()
-        
     }
 
     private func fetchAnimeDescriptions() {
@@ -49,7 +48,7 @@ final class MainViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return descriptions?.data.count ?? 2
+        descriptions?.data.count ?? 2
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -58,7 +57,6 @@ final class MainViewController: UICollectionViewController {
         
         let titles = descriptions?.data[indexPath.item].titles ?? []
         var titleLabel = ""
-        
         titles.forEach { title in
             if title.type == "Default" {
                 titleLabel = title.title
@@ -66,14 +64,19 @@ final class MainViewController: UICollectionViewController {
         }
         cell.animeTitleLabel.text = titleLabel
         
-        let imageURL = descriptions?.data[indexPath.item].images.jpg.image_url ?? "https://applelives.com/wp-content/uploads/2016/03/iPhone-SE-11.jpeg"
-        cell.animeImageView.image = UIImage(contentsOfFile: imageURL)
+        let imageURL = descriptions?.data[indexPath.item].images.jpg.image_url ?? "https://cdn.myanimelist.net/images/anime/4/19644.jpg"
+        cell.animeImageView.downloaded(from: imageURL)
+        cell.animeImageView.clipsToBounds = true
+        
+        let genres = descriptions?.data[indexPath.item].genres ?? []
+        var genreLabel = ""
+        genres.forEach { genre in
+            genreLabel += "\(genre.name) "
+        }
+        cell.animeGenresLabel.text = genreLabel
         
         return cell
     }
-    
-    
-
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -84,9 +87,30 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         let collectionViewWidth = collectionView.bounds.width - 100
-        let itemWidth = collectionViewWidth / 2
+        let itemWidth = collectionViewWidth / 3
         let itemHeight = itemWidth + 60
-            
         return CGSize(width: itemWidth, height: itemHeight)
+    }
+}
+
+// MARK: - UIImageView
+extension UIImageView {
+    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self?.image = image
+            }
+        }.resume()
+    }
+    func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFill) {
+        guard let url = URL(string: link) else { return }
+        downloaded(from: url, contentMode: mode)
     }
 }
