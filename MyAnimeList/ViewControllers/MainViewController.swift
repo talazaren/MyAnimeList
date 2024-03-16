@@ -16,8 +16,7 @@ final class MainViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dataSource = self
-        
+    
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         
@@ -64,9 +63,22 @@ final class MainViewController: UICollectionViewController {
         }
         cell.animeTitleLabel.text = titleLabel
         
-        let imageURL = descriptions?.data[indexPath.item].images.jpg.image_url ?? "https://cdn.myanimelist.net/images/anime/4/19644.jpg"
-        cell.animeImageView.downloaded(from: imageURL)
-        cell.animeImageView.clipsToBounds = true
+        // Подскажите как правильно настроить констрейнты чтобы не ломались настройки
+        // CollectionView при загрузке изображений из сети?
+        let imageSource = descriptions?.data[indexPath.item].images.jpg.image_url ?? "https://cdn.myanimelist.net/images/anime/4/19644.jpg"
+        let imageURL = URL(string: imageSource)!
+        
+        URLSession.shared.dataTask(with: imageURL) { data, _, error in
+            guard let data else {
+                print(error?.localizedDescription ?? "No error description")
+                return
+            }
+            DispatchQueue.main.async {
+                cell.animeImageView.image = UIImage(data: data)
+                cell.animeImageView.contentMode = .scaleAspectFill
+            }
+        }.resume()
+        
         
         let genres = descriptions?.data[indexPath.item].genres ?? []
         var genreLabel = ""
@@ -86,31 +98,11 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
+        
         let collectionViewWidth = collectionView.bounds.width - 100
-        let itemWidth = collectionViewWidth / 3
+        let itemWidth = collectionViewWidth / 2
         let itemHeight = itemWidth + 60
-        return CGSize(width: itemWidth, height: itemHeight)
-    }
-}
 
-// MARK: - UIImageView
-extension UIImageView {
-    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
-        contentMode = mode
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-                else { return }
-            DispatchQueue.main.async() { [weak self] in
-                self?.image = image
-            }
-        }.resume()
-    }
-    func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFill) {
-        guard let url = URL(string: link) else { return }
-        downloaded(from: url, contentMode: mode)
+        return CGSize(width: itemWidth, height: itemHeight)
     }
 }
