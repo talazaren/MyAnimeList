@@ -15,6 +15,12 @@ struct AnimeDataStore: Decodable {
     let images: Images
     let titles: [Title]
     let genres: [Genre]
+    /*let year: Int
+    let episodes: Int
+    let studios: [Studio]
+    let score: Double
+    let synopsis: String
+    let background: String*/
 }
 
 struct Images: Decodable {
@@ -33,3 +39,9 @@ struct Title: Decodable {
 struct Genre: Decodable {
     let name: String
 }
+
+struct Studio: Decodable {
+    let type: String
+    let name: String
+}
+

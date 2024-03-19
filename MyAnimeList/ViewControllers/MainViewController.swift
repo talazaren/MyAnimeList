@@ -19,7 +19,7 @@ final class MainViewController: UICollectionViewController {
     
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        
+    
         fetchAnimeDescriptions()
     }
 
@@ -38,6 +38,20 @@ final class MainViewController: UICollectionViewController {
         return cell
     }
     
+    // MARK: - Navigation
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Выбрана ячейка с индексом \(indexPath.item)")
+        self.performSegue(withIdentifier: "animeInfo", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = sender as? IndexPath else { return }
+        
+        let infoVC = segue.destination as? InfoViewController
+        infoVC?.animeInfo = descriptions[indexPath.item]
+    }
+    
+    // MARK: - Private Methods
     private func fetchAnimeDescriptions() {
         networkManager.fetch(from: Link.myAnimeListURL.url) { [unowned self] result in
             switch result {

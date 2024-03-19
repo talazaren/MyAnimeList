@@ -17,6 +17,7 @@
 		1A3066A52BA4AAB300B27EA5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3066A42BA4AAB300B27EA5 /* MainViewController.swift */; };
 		1A3066A72BA4C78600B27EA5 /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3066A62BA4C78600B27EA5 /* Description.swift */; };
 		1A3066AA2BA9D39300B27EA5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3066A92BA9D39300B27EA5 /* NetworkManager.swift */; };
+		1A3066AC2BA9EF9B00B27EA5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3066AB2BA9EF9B00B27EA5 /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		1A3066A42BA4AAB300B27EA5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1A3066A62BA4C78600B27EA5 /* Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
 		1A3066A92BA9D39300B27EA5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		1A3066AB2BA9EF9B00B27EA5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			children = (
 				1A3066A22BA4AA8600B27EA5 /* CustomCell.swift */,
 				1A3066A42BA4AAB300B27EA5 /* MainViewController.swift */,
+				1A3066AB2BA9EF9B00B27EA5 /* InfoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				1A3066AA2BA9D39300B27EA5 /* NetworkManager.swift in Sources */,
 				1A3066852BA49EF600B27EA5 /* AppDelegate.swift in Sources */,
 				1A3066A32BA4AA8600B27EA5 /* CustomCell.swift in Sources */,
+				1A3066AC2BA9EF9B00B27EA5 /* InfoViewController.swift in Sources */,
 				1A3066A72BA4C78600B27EA5 /* Description.swift in Sources */,
 				1A3066872BA49EF600B27EA5 /* SceneDelegate.swift in Sources */,
 				1A3066A52BA4AAB300B27EA5 /* MainViewController.swift in Sources */,
