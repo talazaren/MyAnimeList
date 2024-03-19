@@ -32,7 +32,7 @@
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="customCell" id="Smq-XK-2Pd" customClass="CustomCell" customModule="MyAnimeList" customModuleProvider="target">
                                 <rect key="frame" x="35" y="10" width="136" height="193"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="z6v-97-CpU" customClass="CustomCell" customModule="MyAnimeList" customModuleProvider="target">
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="z6v-97-CpU">
                                     <rect key="frame" x="0.0" y="0.0" width="136" height="193"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
