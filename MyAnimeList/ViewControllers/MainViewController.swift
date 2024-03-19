@@ -11,8 +11,8 @@ final class MainViewController: UICollectionViewController {
 
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    private let animeAPILink = URL(string: "https://api.jikan.moe/v4/anime")!
-    private var descriptions: AnimeDescription?
+    
+    private var descriptions: [AnimeDataStore] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,8 @@ final class MainViewController: UICollectionViewController {
     }
 
     private func fetchAnimeDescriptions() {
+        let animeAPILink = URL(string: "https://api.jikan.moe/v4/anime")!
+        
         URLSession.shared.dataTask(with: animeAPILink) { [unowned self] data, _, error in
             guard let data else {
                 print(error?.localizedDescription ?? "No error description")
@@ -31,7 +33,8 @@ final class MainViewController: UICollectionViewController {
             }
             
             do {
-                descriptions = try JSONDecoder().decode(AnimeDescription.self, from: data)
+                let response = try JSONDecoder().decode(AnimeDescription.self, from: data)
+                descriptions = response.data
             } catch {
                 print(error)
             }
@@ -47,14 +50,14 @@ final class MainViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        descriptions?.data.count ?? 2
+        descriptions.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath)
         guard let cell = cell as? CustomCell else { return UICollectionViewCell() }
         
-        let titles = descriptions?.data[indexPath.item].titles ?? []
+        let titles = descriptions[indexPath.item].titles
         var titleLabel = ""
         titles.forEach { title in
             if title.type == "Default" {
@@ -63,9 +66,7 @@ final class MainViewController: UICollectionViewController {
         }
         cell.animeTitleLabel.text = titleLabel
         
-        // Подскажите как правильно настроить констрейнты чтобы не ломались настройки
-        // CollectionView при загрузке изображений из сети?
-        let imageSource = descriptions?.data[indexPath.item].images.jpg.image_url ?? "https://cdn.myanimelist.net/images/anime/4/19644.jpg"
+        let imageSource = descriptions[indexPath.item].images.jpg.image_url
         let imageURL = URL(string: imageSource)!
         
         URLSession.shared.dataTask(with: imageURL) { data, _, error in
@@ -75,12 +76,11 @@ final class MainViewController: UICollectionViewController {
             }
             DispatchQueue.main.async {
                 cell.animeImageView.image = UIImage(data: data)
-                cell.animeImageView.contentMode = .scaleAspectFill
             }
         }.resume()
         
         
-        let genres = descriptions?.data[indexPath.item].genres ?? []
+        let genres = descriptions[indexPath.item].genres
         var genreLabel = ""
         genres.forEach { genre in
             genreLabel += "\(genre.name) "

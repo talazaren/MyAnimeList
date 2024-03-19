@@ -8,10 +8,10 @@
 import Foundation
 
 struct AnimeDescription: Decodable {
-    let data: [Data]
+    let data: [AnimeDataStore]
 }
 
-struct Data: Decodable {
+struct AnimeDataStore: Decodable {
     let images: Images
     let titles: [Title]
     let genres: [Genre]

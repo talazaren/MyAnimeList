@@ -16,11 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="20" minimumInteritemSpacing="20" id="8pz-2n-Pfu">
-                            <size key="itemSize" width="128" height="188"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="8pz-2n-Pfu">
+                            <size key="itemSize" width="136" height="193"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="30" minY="10" maxX="30" maxY="0.0"/>
+                            <inset key="sectionInset" minX="35" minY="10" maxX="35" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="6Tq-Be-hId">
                             <rect key="frame" x="0.0" y="-103" width="393" height="852"/>
@@ -29,17 +29,18 @@
                         </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="customCell" id="Smq-XK-2Pd" customClass="CustomCell" customModule="MyAnimeList" customModuleProvider="target">
-                                <rect key="frame" x="30" y="10" width="127.99999999999997" height="188"/>
+                                <rect key="frame" x="35" y="10" width="136" height="193"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="z6v-97-CpU" customClass="CustomCell" customModule="MyAnimeList" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="188"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="z6v-97-CpU" customClass="CustomCell" customModule="MyAnimeList" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="136" height="193"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jYz-SR-GDj">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jYz-SR-GDj">
+                                            <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
                                             <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="128" id="AOX-aI-P7n"/>
+                                                <constraint firstAttribute="height" constant="136" id="70E-4w-N1x"/>
+                                                <constraint firstAttribute="width" constant="136" id="SGD-Uf-cQY"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -48,13 +49,13 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emH-dm-KYB">
-                                            <rect key="frame" x="46.666666666666671" y="138" width="34.666666666666671" height="21.666666666666657"/>
+                                            <rect key="frame" x="50.666666666666671" y="146" width="34.666666666666671" height="21.666666666666657"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TrA-iO-snA">
-                                            <rect key="frame" x="40.666666666666657" y="162.66666666666666" width="47" height="17"/>
+                                            <rect key="frame" x="44.666666666666657" y="170.66666666666666" width="47" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -70,6 +71,7 @@
                                         <constraint firstAttribute="trailing" secondItem="jYz-SR-GDj" secondAttribute="trailing" id="n4T-ld-Jom"/>
                                     </constraints>
                                 </collectionViewCellContentView>
+                                <size key="customSize" width="136" height="193"/>
                                 <connections>
                                     <outlet property="animeGenresLabel" destination="TrA-iO-snA" id="VQS-JN-ac2"/>
                                     <outlet property="animeImageView" destination="jYz-SR-GDj" id="ken-HR-KV0"/>
