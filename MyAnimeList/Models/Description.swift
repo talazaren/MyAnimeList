@@ -22,7 +22,7 @@ struct Images: Decodable {
 }
 
 struct Image: Decodable {
-    let image_url: String
+    let imageUrl: String
 }
 
 struct Title: Decodable {

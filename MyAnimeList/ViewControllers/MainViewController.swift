@@ -11,7 +11,7 @@ final class MainViewController: UICollectionViewController {
 
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    
+    private let networkManager = NetworkManager.shared
     private var descriptions: [AnimeDataStore] = []
     
     override func viewDidLoad() {
@@ -23,32 +23,7 @@ final class MainViewController: UICollectionViewController {
         fetchAnimeDescriptions()
     }
 
-    private func fetchAnimeDescriptions() {
-        let animeAPILink = URL(string: "https://api.jikan.moe/v4/anime")!
-        
-        URLSession.shared.dataTask(with: animeAPILink) { [unowned self] data, _, error in
-            guard let data else {
-                print(error?.localizedDescription ?? "No error description")
-                return
-            }
-            
-            do {
-                let response = try JSONDecoder().decode(AnimeDescription.self, from: data)
-                descriptions = response.data
-            } catch {
-                print(error)
-            }
-            
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                self.collectionView.reloadData()
-            }
-        }.resume()
-    }
-
-
     // MARK: UICollectionViewDataSource
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         descriptions.count
     }
@@ -57,37 +32,23 @@ final class MainViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath)
         guard let cell = cell as? CustomCell else { return UICollectionViewCell() }
         
-        let titles = descriptions[indexPath.item].titles
-        var titleLabel = ""
-        titles.forEach { title in
-            if title.type == "Default" {
-                titleLabel = title.title
-            }
-        }
-        cell.animeTitleLabel.text = titleLabel
-        
-        let imageSource = descriptions[indexPath.item].images.jpg.image_url
-        let imageURL = URL(string: imageSource)!
-        
-        URLSession.shared.dataTask(with: imageURL) { data, _, error in
-            guard let data else {
-                print(error?.localizedDescription ?? "No error description")
-                return
-            }
-            DispatchQueue.main.async {
-                cell.animeImageView.image = UIImage(data: data)
-            }
-        }.resume()
-        
-        
-        let genres = descriptions[indexPath.item].genres
-        var genreLabel = ""
-        genres.forEach { genre in
-            genreLabel += "\(genre.name) "
-        }
-        cell.animeGenresLabel.text = genreLabel
+        let description = descriptions[indexPath.item]
+        cell.configure(with: description)
         
         return cell
+    }
+    
+    private func fetchAnimeDescriptions() {
+        networkManager.fetch(from: Link.myAnimeListURL.url) { [unowned self] result in
+            switch result {
+            case .success(let animeData):
+                descriptions = animeData.data
+                activityIndicator.stopAnimating()
+                collectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
