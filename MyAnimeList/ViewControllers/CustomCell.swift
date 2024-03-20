@@ -23,6 +23,7 @@ final class CustomCell: UICollectionViewCell {
             }
         }
         animeTitleLabel.text = titleLabel
+        // Подскажите пожалуйста, как делать перенос текста?
         
         let genres = descriptions.genres
         var genreLabel = ""

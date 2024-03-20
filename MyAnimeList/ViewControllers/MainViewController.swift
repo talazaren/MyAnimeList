@@ -11,7 +11,6 @@ final class MainViewController: UICollectionViewController {
 
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    private let networkManager = NetworkManager.shared
     private var descriptions: [AnimeDataStore] = []
     
     override func viewDidLoad() {
@@ -40,7 +39,6 @@ final class MainViewController: UICollectionViewController {
     
     // MARK: - Navigation
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Выбрана ячейка с индексом \(indexPath.item)")
         self.performSegue(withIdentifier: "animeInfo", sender: indexPath)
     }
     
@@ -53,6 +51,7 @@ final class MainViewController: UICollectionViewController {
     
     // MARK: - Private Methods
     private func fetchAnimeDescriptions() {
+        let networkManager = NetworkManager.shared
         networkManager.fetch(from: Link.myAnimeListURL.url) { [unowned self] result in
             switch result {
             case .success(let animeData):

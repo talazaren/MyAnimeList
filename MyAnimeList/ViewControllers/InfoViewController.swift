@@ -9,19 +9,38 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
+    @IBOutlet var synopsisLabel: UILabel!
+    @IBOutlet var japaneseLabel: UILabel!
     @IBOutlet var mainImageView: UIImageView!
     
-    private let networkManager = NetworkManager.shared
     var animeInfo: AnimeDataStore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        configure()
     }
     
-   /* private func fetchImage() {
-        let imageURL = URL(string: animeInfo.background)!
+    private func configure() {
+        let networkManager = NetworkManager.shared
+        
+        let titles = animeInfo.titles
+        let titleLabel = UILabel()
+        titles.forEach { title in
+            if title.type == "Default" {
+                titleLabel.text = title.title
+            }
+        }
+        navigationItem.title = titleLabel.text
+        // Аналогичный вопрос с переносом текста :(
+        
+        titles.forEach { title in
+            if title.type == "Japanese" {
+                japaneseLabel.text = title.title
+            }
+        }
+    
+        let imageURL = URL(string: animeInfo.images.jpg.imageUrl)!
         networkManager.fetchImage(from: imageURL) { [unowned self] result in
             switch result {
             case .success(let imageData):
@@ -30,6 +49,8 @@ class InfoViewController: UIViewController {
                 print(error)
             }
         }
-    }*/
-
+        
+        synopsisLabel.text = animeInfo.synopsis
+        // Как сделать, чтобы скроллвью скроллился?
+    }
 }
