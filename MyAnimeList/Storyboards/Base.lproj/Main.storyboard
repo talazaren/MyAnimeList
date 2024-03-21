@@ -175,7 +175,6 @@
                         <outlet property="japaneseLabel" destination="MC6-7f-GN9" id="k2R-kK-5T4"/>
                         <outlet property="mainImageView" destination="xqW-M7-81J" id="eZZ-1j-2Ws"/>
                         <outlet property="synopsisLabel" destination="NmF-2w-ZLw" id="edD-g5-nQ3"/>
-                        <outlet property="textScrollView" destination="gJj-iA-J9K" id="b4w-Ov-kv3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AcL-Qi-Pmf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
