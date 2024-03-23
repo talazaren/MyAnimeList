@@ -32,7 +32,6 @@ class InfoViewController: UIViewController {
             }
         }
         navigationItem.title = titleLabel.text
-        // Аналогичный вопрос с переносом текста :(
         
         titles.forEach { title in
             if title.type == "Japanese" {
@@ -40,15 +39,15 @@ class InfoViewController: UIViewController {
             }
         }
     
-        let imageURL = URL(string: animeInfo.images.jpg.imageUrl)!
-        networkManager.fetchImage(from: imageURL) { [unowned self] result in
-            switch result {
-            case .success(let imageData):
-                mainImageView.image = UIImage(data: imageData)
-            case .failure(let error):
-                print(error)
+        networkManager.fetchData(
+            from: animeInfo.images.jpg.image_url) { [unowned self] result in
+                switch result {
+                case .success(let imageData):
+                    mainImageView.image = UIImage(data: imageData)
+                case .failure(let error):
+                    print(error)
+                }
             }
-        }
         
         synopsisLabel.text = animeInfo.synopsis
         // Как сделать, чтобы скроллвью скроллился?

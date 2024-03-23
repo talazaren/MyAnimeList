@@ -23,7 +23,6 @@ final class CustomCell: UICollectionViewCell {
             }
         }
         animeTitleLabel.text = titleLabel
-        // Подскажите пожалуйста, как делать перенос текста?
         
         let genres = descriptions.genres
         var genreLabel = ""
@@ -32,14 +31,14 @@ final class CustomCell: UICollectionViewCell {
         }
         animeGenresLabel.text = genreLabel
         
-        let imageURL = URL(string: descriptions.images.jpg.imageUrl)!
-        networkManager.fetchImage(from: imageURL) { [unowned self] result in
-            switch result {
-            case .success(let imageData):
-                animeImageView.image = UIImage(data: imageData)
-            case .failure(let error):
-                print(error)
+        networkManager.fetchData(
+            from: descriptions.images.jpg.image_url) { [unowned self] result in
+                switch result {
+                case .success(let imageData):
+                    animeImageView.image = UIImage(data: imageData)
+                case .failure(let error):
+                    print(error)
+                }
             }
-        }
     }
 }

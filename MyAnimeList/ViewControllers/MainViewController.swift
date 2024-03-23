@@ -55,7 +55,7 @@ final class MainViewController: UICollectionViewController {
         networkManager.fetch(from: Link.myAnimeListURL.url) { [unowned self] result in
             switch result {
             case .success(let animeData):
-                descriptions = animeData.data
+                descriptions = animeData
                 activityIndicator.stopAnimating()
                 collectionView.reloadData()
             case .failure(let error):
