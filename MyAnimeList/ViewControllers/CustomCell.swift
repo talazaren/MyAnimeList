@@ -32,7 +32,7 @@ final class CustomCell: UICollectionViewCell {
         animeGenresLabel.text = genreLabel
         
         networkManager.fetchData(
-            from: descriptions.images.jpg.image_url) { [unowned self] result in
+            from: descriptions.images.jpg.imageUrl) { [unowned self] result in
                 switch result {
                 case .success(let imageData):
                     animeImageView.image = UIImage(data: imageData)

@@ -21,9 +21,15 @@ struct AnimeDataStore {
     }
     
     init(animeDataStoreDetails: [String: Any]) {
-        images = Images.getImages(from: animeDataStoreDetails["images"] as Any)
-        titles = Title.getTitles(from: animeDataStoreDetails["titles"] as Any)
-        genres = Genre.getGenres(from: animeDataStoreDetails["genres"] as Any)
+        let imagesDetails = animeDataStoreDetails["images"] as? [String: Any] ?? [:]
+        images = Images(imagesDetails: imagesDetails)
+        
+        let titlesDetails = animeDataStoreDetails["titles"] as? [[String: Any]] ?? []
+        titles = titlesDetails.map({ Title(titleDetails: $0) })
+        
+        let genreDetails = animeDataStoreDetails["genres"] as? [[String: Any]] ?? []
+        genres = genreDetails.map({ Genre(genreDetails: $0) })
+        
         synopsis = animeDataStoreDetails["synopsis"] as? String ?? ""
     }
     
@@ -42,26 +48,21 @@ struct Images {
     }
     
     init(imagesDetails: [String: Any]) {
-        guard
-            let image = imagesDetails["jpg"] as? [String: String],
-            let imageUrl = image["image_url"] else {
-            jpg = Image(image_url: "")
-            return
-        }
-        jpg = Image(image_url: imageUrl)
-    }
-    
-    static func getImages(from value: Any) -> Images {
-        guard let images = value as? [String: Any] else {
-            return Images.init(imagesDetails: [:])
-        }
-        
-        return Images.init(imagesDetails: images)
+        let jpgDetails = imagesDetails["jpg"] as? [String: String] ?? [:]
+        jpg = Image(imageDetails: jpgDetails)
     }
 }
 
 struct Image {
-    let image_url: String
+    let imageUrl: String
+    
+    init(imageUrl: String) {
+        self.imageUrl = imageUrl
+    }
+    
+    init(imageDetails: [String: String]) {
+        imageUrl = imageDetails["image_url"] ?? ""
+    }
 }
 
 struct Title {
@@ -73,14 +74,9 @@ struct Title {
         self.title = title
     }
     
-    init(titleDetails: [String: String]) {
-        type = titleDetails["type"] ?? ""
-        title = titleDetails["title"] ?? ""
-    }
-    
-    static func getTitles(from value: Any) -> [Title] {
-        guard let titlesDetails = value as? [[String: String]] else { return [] }
-        return titlesDetails.map { Title.init(titleDetails: $0) }
+    init(titleDetails: [String: Any]) {
+        type = titleDetails["type"] as? String ?? ""
+        title = titleDetails["title"] as? String ?? ""
     }
 }
 
@@ -92,15 +88,6 @@ struct Genre {
     }
     
     init(genreDetails: [String: Any]) {
-        guard let genreName = genreDetails["name"] as? String else {
-            name = ""
-            return
-        }
-        name = genreName
-    }
-    
-    static func getGenres(from value: Any) -> [Genre] {
-        guard let genresDetails = value as? [[String: Any]] else { return [] }
-        return genresDetails.map { Genre.init(genreDetails: $0) }
+        name = genreDetails["name"] as? String ?? ""
     }
 }

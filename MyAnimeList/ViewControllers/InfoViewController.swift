@@ -40,7 +40,7 @@ class InfoViewController: UIViewController {
         }
     
         networkManager.fetchData(
-            from: animeInfo.images.jpg.image_url) { [unowned self] result in
+            from: animeInfo.images.jpg.imageUrl) { [unowned self] result in
                 switch result {
                 case .success(let imageData):
                     mainImageView.image = UIImage(data: imageData)
